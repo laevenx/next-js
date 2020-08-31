@@ -3,15 +3,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function List({ownersList}) {
-//   const [owners, setOwners] = useState([]);
-//   useEffect(() => {
-//     async function loadData() {
-//      
-//       setOwners(ownersList);
-//     }
-
-//     loadData();
-//   }, []);
 
   return (
     <div>

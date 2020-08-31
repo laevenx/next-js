@@ -213,6 +213,7 @@ MongoClient.connect("mongodb://localhost:27017", (err, database) => {
   });
 
   app.post("/login", (req, res, next) => {
+    console.log(req.body.email)
     productDB
       .collection("user")
       .find({ email: req.body.email })
@@ -221,15 +222,20 @@ MongoClient.connect("mongodb://localhost:27017", (err, database) => {
           throw err;
         }
 
-        console.log(result);
+        if (result == []){
+          res.send('invalid email')
+        }else if (req.body.password == result[0].password){
+          res.send('logged in')
+        }else{
+          res.send('invalid password')
+        }
 
-        res.send(result);
       });
   });
   app.post("/register", (req, res, next) => {
     let acc = {
       name: req.body.name,
-      emial: req.body.email,
+      email: req.body.email,
       password: req.body.password,
       saldo: req.body.saldo,
       product: [],
